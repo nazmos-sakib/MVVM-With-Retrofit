@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -18,11 +19,14 @@ import com.example.check24_interview.data.Product
 import com.example.check24_interview.presentation.product.details.ProductDetailsUI
 import com.example.check24_interview.presentation.product.overview.Overview
 import com.example.check24_interview.presentation.product.overview.OverviewViewModel
+import javax.inject.Inject
 
 @Composable
 fun Navigation(modifier: Modifier = Modifier){
 
-    val viewModel = OverviewViewModel()
+    //val viewModel = OverviewViewModel()
+    val viewModel = hiltViewModel<OverviewViewModel>()
+
 
     var selectedProduct by remember {
         mutableStateOf(EmptyProduct())

@@ -9,16 +9,4 @@ interface ApiService {
     @GET("/products-test.json")
     suspend fun getDataFromApi(): ApiDataModel
 
-    companion object {
-        private var apiService: ApiService? = null
-        fun getInstance(): ApiService {
-            if (apiService == null) {
-                apiService = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(ApiService::class.java)
-            }
-            return apiService!!
-        }
-    }
 }

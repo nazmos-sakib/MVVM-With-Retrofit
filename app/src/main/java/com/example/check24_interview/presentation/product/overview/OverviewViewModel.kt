@@ -9,10 +9,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.check24_interview.data.ApiService
 import com.example.check24_interview.domain.data.model.ResponseState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OverviewViewModel() : ViewModel () {
+@HiltViewModel
+class OverviewViewModel @Inject constructor(private val api:ApiService) : ViewModel () {
     //state solution ------
     private val _state = mutableStateOf(ResponseState())
     val state: State<ResponseState>
@@ -26,7 +29,8 @@ class OverviewViewModel() : ViewModel () {
     private fun getData(){
         viewModelScope.launch {
             try {
-                val temp = ApiService.getInstance().getDataFromApi()
+                //val temp = ApiService.getInstance().getDataFromApi()
+                val temp = api.getDataFromApi()
                 Log.d("<<TAG>>", "apiData: $temp")
                 delay(3000L)
                 _state.value = ResponseState(
